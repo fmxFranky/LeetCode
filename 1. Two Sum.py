@@ -56,6 +56,6 @@ class Solution(object):
 if __name__ == '__main__':
     slt = Solution()
     nums = [3,2,4,0,0]
-    print({nums[i]:i for i in range(len(nums))})
-    # print(slt.twoSum_3(nums=nums, target=target))
+    target = 5
+    print(slt.twoSum_2(nums=nums, target=target))
 
