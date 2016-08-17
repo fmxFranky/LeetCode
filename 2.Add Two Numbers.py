@@ -75,4 +75,4 @@ if __name__ == '__main__':
 
 
     slt = Solution()
-    showListNode(slt.addTwoNumbers(digit2ln([5,9,9]), digit2ln([5])))
+    showListNode(slt.addTwoNumbers_1(digit2ln([5,9,9]), digit2ln([5])))
