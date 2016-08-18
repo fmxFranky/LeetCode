@@ -81,6 +81,43 @@ class Solution(object):
                 ct = i
         return t[ct - (cur - 1):ct + (cur - 1) + 1].replace('@', '')
 
+    def longestPalindrome_4(self, s):
+        """
+        动态规划
+        状态转移方程
+            f(i,j) = True if s[i:j] == s[i:j+1][::-1] else False
+            f(i,j) = f(i+1,j-1) and s[i]==s[j]
+        边界条件:
+            f(i,i) = True
+            f(i,i+1) = s[i]==s[i+1]
+        从状态转移方程中就可以看出迭代方向,注意!
+        效率:最后一组跑不过去
+        :type s: str
+        :rtype: str
+        """
+        import numpy as np
+        n = len(s)
+        f = np.zeros((n, n), dtype=bool)
+        # # numpy 版本
+        # for j in range(n):
+        #     for i in range(j,-1,-1):
+        #         f[i][j] = True if s[i]==s[j] and (j-i<2 or f[i+1][j-1]) else False
+        # head, tail = np.where(f==True)
+        # ans = np.argmax(tail-head)
+        # return s[head[ans]:tail[ans] + 1]
+
+        # 普通版本
+        x = y = 0
+        cur = 0
+        for j in range(n):
+            for i in range(j, -1, -1):
+                if s[i] == s[j] and (j - i < 2 or f[i + 1][j - 1]):
+                    f[i][j] = True
+                    if j - i + 1 > cur:
+                        x, y = i, j
+                        cur = j - i + 1
+        return s[x:y + 1]
+
 
 if __name__ == '__main__':
-    print(Solution().longestPalindrome_3("aabbssbbas"))
+    print(Solution().longestPalindrome_4("abass"))
